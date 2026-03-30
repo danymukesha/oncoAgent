@@ -66,5 +66,6 @@ utils::globalVariables(c(
   "database_score", "experimental_score", "from", "gene", "pmid",
   "preferredName_A", "preferredName_B", "private", "textmining_score",
   "to", "composite_centrality", "dependency_score", "n",
-  "druggability_score", "is_kinase", "has_known_drug"
+  "druggability_score", "is_kinase", "has_known_drug",
+  "median"
 ))

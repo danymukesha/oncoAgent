@@ -34,15 +34,22 @@ composite_target_score <- function(de_results,
   genes <- de_results$gene
   n <- length(genes)
 
-  # DE score: use padj if available, otherwise pvalue
-  pval_col <- if ("padj" %in% names(de_results)) "padj" else if ("pvalue" %in% names(de_results)) "pvalue" else NULL
-  if (!is.null(pval_col)) {
-    pvals <- pmax(de_results[[pval_col]][match(genes, de_results$gene)], .Machine$double.xmin)
+  # DE score: use consensus_score if available, then padj, then pvalue
+  if ("consensus_score" %in% names(de_results)) {
+    # From consensus_de: higher consensus_score = stronger evidence
+    cs <- de_results$consensus_score[match(genes, de_results$gene)]
+    cs[is.na(cs)] <- 0
+    de_score <- cs / max(cs, na.rm = TRUE)
   } else {
-    pvals <- rep(.Machine$double.xmin, n)
+    pval_col <- if ("padj" %in% names(de_results)) "padj" else if ("pvalue" %in% names(de_results)) "pvalue" else NULL
+    if (!is.null(pval_col)) {
+      pvals <- pmax(de_results[[pval_col]][match(genes, de_results$gene)], .Machine$double.xmin)
+    } else {
+      pvals <- rep(.Machine$double.xmin, n)
+    }
+    de_neglog <- -log10(pvals)
+    de_score <- de_neglog / max(de_neglog, na.rm = TRUE)
   }
-  de_neglog <- -log10(pvals)
-  de_score <- de_neglog / max(de_neglog, na.rm = TRUE)
 
   # Survival score
   if (!is.null(survival_hr) && "gene" %in% names(survival_hr)) {

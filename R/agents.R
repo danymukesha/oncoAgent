@@ -672,9 +672,14 @@ GapDetectionAgent <- R6::R6Class(
         #' @description Get gap summary
         #' @return List with gap statistics
         summary = function() {
+            gap_types <- if (length(self$state$gaps) > 0) {
+                table(sapply(self$state$gaps, `[[`, "type"))
+            } else {
+                table(character(0))
+            }
             list(
                 n_gaps = length(self$state$gaps),
-                by_type = table(sapply(self$state$gaps, `[[`, "type")),
+                by_type = gap_types,
                 severity = self$state$severity,
                 recommendations = self$state$recommendations
             )
