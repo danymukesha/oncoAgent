@@ -1,6 +1,6 @@
 # oncoAgent  
 
-**Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data** <a href="https://github.com/danymukesha/oncoAgent"><img src="man/figures/oncoAgent_logo_origin.png" align="right" height="50" alt="oncoAgent website" /></a>
+**Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data** <a href="https://github.com/danymukesha/oncoAgent"><img src="man/figures/oncoAgent_logo_origin.png" align="right" height="90" alt="oncoAgent website" /></a>
 
 ![R >= 4.1.0](https://img.shields.io/badge/R-%E2%89%A54.1.0-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
