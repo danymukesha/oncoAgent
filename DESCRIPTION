@@ -1,6 +1,6 @@
 Package: oncoAgent
 Title: Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data
-Version: 0.99.0
+Version: 0.1.0
 Authors@R: 
     person("Dany", "Mukesha", , "danymukesha@gmail.com", 
             role = c("aut", "cre"),
