@@ -1,0 +1,168 @@
+---
+title: "Getting Started with oncoAgent"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with oncoAgent}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Overview
+
+oncoAgent is a semi-autonomous research system for oncology target discovery
+that integrates multi-omics data with agentic AI workflows.
+
+## Quick Start
+
+### 1. Create Pipeline Configuration
+
+```{r}
+library(oncoAgent)
+
+config <- create_pipeline_config(
+  project = "TCGA-BRCA",
+  cancer_type = "breast cancer",
+  de_methods = c("deseq2", "edger", "limma"),
+  padj_threshold = 0.05,
+  output_dir = "results"
+)
+```
+
+### 2. Run with Pre-loaded Data
+
+```{r}
+# Using synthetic/demo data
+counts <- matrix(rnbinom(100 * 20, mu = 100, size = 10),
+                 nrow = 100, ncol = 20)
+rownames(counts) <- paste0("Gene_", 1:100)
+colnames(counts) <- paste0("Sample_", 1:20)
+
+col_data <- data.frame(
+  condition = factor(rep(c("tumor", "normal"), each = 10)),
+  row.names = colnames(counts)
+)
+
+clinical <- data.frame(
+  sample_id = colnames(counts),
+  time = rexp(20, 0.01),
+  status = rbinom(20, 1, 0.5)
+)
+
+result <- run_oncopipeline(
+  config,
+  existing_data = list(
+    expression = counts,
+    col_data = col_data,
+    clinical = clinical
+  )
+)
+```
+
+### 3. Run with Real TCGA Data
+
+```{r}
+config <- create_pipeline_config(
+  project = "TCGA-BRCA",
+  cancer_type = "breast cancer"
+)
+
+result <- run_oncopipeline(config)
+```
+
+## Individual Modules
+
+### Data Ingestion
+
+```{r}
+# Fetch TCGA data
+tcga <- fetch_tcga_data("TCGA-BRCA")
+
+# Fetch DepMap CRISPR data
+crispr <- fetch_depmap_crispr()
+
+# Fetch drug sensitivity
+gdsc <- fetch_gdsc_drug_sensitivity()
+```
+
+### Differential Expression
+
+```{r}
+# Single method
+de_deseq2 <- run_deseq2(counts, col_data)
+
+# Consensus across methods
+de_consensus <- consensus_de(counts, col_data,
+                             methods = c("deseq2", "edger", "limma"))
+```
+
+### Survival Analysis
+
+```{r}
+hr_table <- calculate_hazard_ratios(
+  counts,
+  time = clinical$time,
+  status = clinical$status
+)
+```
+
+### Network Analysis
+
+```{r}
+genes <- rownames(counts)[1:50]
+ppi <- fetch_string_ppi(genes)
+network <- build_ppi_network(ppi)
+centrality <- calculate_network_centrality(network)
+modules <- detect_network_modules(network)
+```
+
+### Target Scoring
+
+```{r}
+scores <- composite_target_score(
+  de_results = de_consensus,
+  survival_hr = hr_table,
+  centrality = centrality
+)
+
+ranked <- rank_targets(scores, top_n = 20)
+```
+
+## Agentic Workflow
+
+The five agents work together:
+
+```{r}
+# Data Discovery Agent
+dd_agent <- DataDiscoveryAgent$new(project = "TCGA-BRCA")
+dd_agent$assess(existing_data)
+
+# Analysis Agent
+analysis_agent <- AnalysisAgent$new()
+results <- analysis_agent$run(data)
+
+# Gap Detection Agent
+gap_agent <- GapDetectionAgent$new()
+gaps <- gap_agent$detect(results, data)
+
+# Hypothesis Agent
+hyp_agent <- HypothesisAgent$new()
+hypotheses <- hyp_agent$generate(results$scoring)
+
+# Evaluation Agent
+eval_agent <- EvaluationAgent$new()
+metrics <- eval_agent$evaluate(ranked, gold_standard)
+```
+
+## Evaluation
+
+```{r}
+gs <- build_reference_panel(sources = c("cosmic", "cgc"))
+
+metrics <- benchmark_vs_goldstandard(ranked, gs)
+auroc <- calculate_auroc(ranked, gs$genes)
+report <- generate_evaluation_report(ranked, gs, "eval_report.md")
+```

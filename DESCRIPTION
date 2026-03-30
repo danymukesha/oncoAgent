@@ -1,0 +1,56 @@
+Package: oncoAgent
+Title: Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data
+Version: 0.99.0
+Authors@R: 
+    person("Dany", "Mukesha", , "danymukesha@gmail.com", 
+            role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0001-9514-751X"))
+Description: A semi-autonomous research system that integrates multi-omics
+    data (genomics, transcriptomics, CRISPR screens, drug sensitivity) with
+    literature mining and clinical outcomes to identify and prioritize
+    oncology drug targets. Features adaptive agentic workflows with gap
+    detection, hypothesis generation, and benchmarking against known cancer
+    gene sets (COSMIC, Open Targets). Designed for industry-grade target
+    discovery pipelines at pharma scale.
+License: MIT + file LICENSE
+URL: https://github.com/danymukesha/oncoAgent
+BugReports: https://github.com/danymukesha/oncoAgent/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+    R (>= 4.1.0)
+Imports:
+    SummarizedExperiment,
+    DESeq2,
+    edgeR,
+    limma,
+    survival,
+    glmnet,
+    igraph,
+    data.table,
+    dplyr,
+    tidyr,
+    purrr,
+    stringr,
+    jsonlite,
+    httr,
+    xml2,
+    biomaRt,
+    pROC,
+    ggplot2,
+    parallel,
+    R6
+Suggests:
+    TCGAbiolinks,
+    tarchetypes,
+    targets,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    covr,
+    digest,
+    apeglm,
+    sva
+Config/testthat/edition: 3
+VignetteBuilder: knitr
