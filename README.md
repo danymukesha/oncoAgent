@@ -5,6 +5,7 @@
 ![R >= 4.1.0](https://img.shields.io/badge/R-%E2%89%A54.1.0-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Tests: 135 passing](https://img.shields.io/badge/Tests-135%20passing-brightgreen)
+[![R-CMD-check](https://github.com/danymukesha/oncoAgent/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danymukesha/oncoAgent/actions/workflows/R-CMD-check.yaml)
 
 ---
 
@@ -345,6 +346,46 @@ oncoAgent/
 
 ---
 
+## Citation
+
+```bibtex
+@software{oncoagent2026,
+  title  = {oncoAgent: Agentic AI-Driven Oncology Target Discovery
+            from Multi-Omics Data},
+  author = {Dany Mukesha},
+  year   = {2026},
+  url    = {https://github.com/oncoagent/oncoAgent}
+}
+```
+
+---
+
+## Demo
+
+A complete end-to-end demo is included at `inst/scripts/run_demo.R`. It:
+
+- Builds a reference panel from COSMIC Cancer Gene Census
+- Fetches PPI data from STRING (with synthetic fallback)
+- Simulates realistic TCGA-BRCA-like RNA-seq data
+- Runs consensus DE, survival analysis, network analysis
+- Scores and ranks targets
+- Benchmarks against gold standards
+- Generates gap reports and hypotheses
+
+```r
+# After installing oncoAgent:
+source(system.file("scripts", "run_demo.R", package = "oncoAgent"))
+```
+
+Runtime: ~2-5 minutes.
+
+---
+
+## License
+
+MIT
+
+---
 ## References
 
 [^1]: Weinstein, J.N. et al. (2013). The Cancer Genome Atlas Pan-Cancer
@@ -431,43 +472,3 @@ oncoAgent/
       Biology*, 5(12), e1000591.
       doi:[10.1371/journal.pcbi.1000591](https://doi.org/10.1371/journal.pcbi.1000591)
 
----
-
-## Citation
-
-```bibtex
-@software{oncoagent2026,
-  title  = {oncoAgent: Agentic AI-Driven Oncology Target Discovery
-            from Multi-Omics Data},
-  author = {Dany Mukesha},
-  year   = {2026},
-  url    = {https://github.com/oncoagent/oncoAgent}
-}
-```
-
----
-
-## Demo
-
-A complete end-to-end demo is included at `inst/scripts/run_demo.R`. It:
-
-- Builds a reference panel from COSMIC Cancer Gene Census
-- Fetches PPI data from STRING (with synthetic fallback)
-- Simulates realistic TCGA-BRCA-like RNA-seq data
-- Runs consensus DE, survival analysis, network analysis
-- Scores and ranks targets
-- Benchmarks against gold standards
-- Generates gap reports and hypotheses
-
-```r
-# After installing oncoAgent:
-source(system.file("scripts", "run_demo.R", package = "oncoAgent"))
-```
-
-Runtime: ~2-5 minutes.
-
----
-
-## License
-
-MIT
