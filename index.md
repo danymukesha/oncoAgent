@@ -47,43 +47,43 @@ work:
 
 - **The Cancer Genome Atlas (TCGA)**: Pan-cancer genomic
   characterization resource spanning 33 cancer types, 11,000+ tumors
-  \[^1\]\[^2\]. oncoAgent uses TCGAbiolinks for programmatic access
-  \[^3\].
+  [¹](#fn1)[²](#fn2). oncoAgent uses TCGAbiolinks for programmatic
+  access [³](#fn3).
 
 - **Cancer Dependency Map (DepMap)**: Genome-scale CRISPR-Cas9
-  essentiality screens across 1,000+ cancer cell lines \[^4\]\[^5\].
-  Used to identify genes with selective dependencies in specific cancer
-  contexts.
+  essentiality screens across 1,000+ cancer cell lines
+  [⁴](#fn4)[⁵](#fn5). Used to identify genes with selective dependencies
+  in specific cancer contexts.
 
 - **Genomics of Drug Sensitivity in Cancer (GDSC)**: Systematic drug
   response profiling linking genomic features to pharmacological
-  sensitivity \[^6\]\[^7\].
+  sensitivity [⁶](#fn6)[⁷](#fn7).
 
 - **STRING Database**: Protein-protein interaction network covering
   \>14,000 organisms with scored evidence from experiments, databases,
-  and text mining \[^8\].
+  and text mining [⁸](#fn8).
 
 - **COSMIC Cancer Gene Census**: Curated list of genes with mutations
   causally implicated in cancer, used as the primary gold standard for
-  benchmarking \[^9\].
+  benchmarking [⁹](#fn9).
 
 ### Analysis Methods
 
-- **Differential Expression**: Consensus ranking across DESeq2 \[^10\],
-  edgeR \[^11\], and limma-voom \[^12\], following best practices from
-  systematic benchmarking studies \[^13\].
+- **Differential Expression**: Consensus ranking across DESeq2
+  [¹⁰](#fn10), edgeR [¹¹](#fn11), and limma-voom [¹²](#fn12), following
+  best practices from systematic benchmarking studies [¹³](#fn13).
 
-- **Survival Analysis**: Cox proportional hazards regression \[^14\]
+- **Survival Analysis**: Cox proportional hazards regression [¹⁴](#fn14)
   with LASSO-penalized variable selection for multivariate models
-  \[^15\].
+  [¹⁵](#fn15).
 
 - **Network Analysis**: Louvain community detection on PPI networks
-  \[^16\] with centrality-based target prioritization, following the
-  network proximity paradigm \[^17\].
+  [¹⁶](#fn16) with centrality-based target prioritization, following the
+  network proximity paradigm [¹⁷](#fn17).
 
 - **Target Scoring**: Composite scoring integrating differential
   expression significance, survival association, network centrality, and
-  CRISPR dependency, with Bayesian posterior ranking \[^18\].
+  CRISPR dependency, with Bayesian posterior ranking [¹⁸](#fn18).
 
 ------------------------------------------------------------------------
 
@@ -247,4 +247,237 @@ cat(eval_agent$report())
 oncoAgent implements five R6 agent classes that collaborate in an
 adaptive loop:
 
-\`\`\` bb
+    ┌─────────────────────────────────────────────────────────────┐
+    │                    Orchestration Layer                      │
+    │              run_oncopipeline(config)                       │
+    └──────────┬──────────┬─────────┬─────────┬───────────┬───────┘
+               │          │         │         │           |
+         ┌─────▼──┐ ┌─────▼──┐ ┌────▼───┐ ┌───▼────┐ ┌────▼─────┐
+         │ Data   │ │Analy-  │ │Hypo-   │ │ Gap    │ │Evalua-   │
+         │ Discov │ │sis     │ │thesis  │ │Detect  │ │tion      │
+         │ Agent  │ │Agent   │ │Agent   │ │Agent   │ │Agent     │
+         └────────┘ └────────┘ └────────┘ └────────┘ └──────────┘
+             │           │          │          │           │
+        Fetch data   Run DE/     Generate   Find gaps   Benchmark
+        Check gaps   Surv/Net    mechan-    Suggest     vs COSMIC
+                     pipelines   isms       fixes       CGC gold
+                                                        standards
+
+### Adaptive Loop
+
+``` r
+# The agentic loop automatically re-runs if critical gaps are found
+adaptive_result <- adaptive_pipeline_loop(
+  config,
+  max_iterations = 5,
+  improvement_threshold = 0.01
+)
+```
+
+The gap detection agent identifies:
+
+- Missing data modalities (expression, clinical, PPI, CRISPR)
+- Insufficient sample sizes (\< 50 samples)
+- Low DEG signal (\< 100 significant genes)
+- Conflicting signals between scoring dimensions
+
+------------------------------------------------------------------------
+
+## Project Structure
+
+    oncoAgent/
+    ├── R/
+    │   ├── data_ingestion.R         # TCGA, DepMap, GDSC, STRING, PubMed
+    │   ├── preprocessing.R          # Normalization, batch correction, QC
+    │   ├── differential_expression.R # DESeq2, edgeR, limma-voom, consensus
+    │   ├── survival_analysis.R      # Cox PH, KM, LASSO-survival
+    │   ├── network_analysis.R       # PPI, Louvain, centrality
+    │   ├── target_scoring.R         # Composite, Bayesian, druggability
+    │   ├── agents.R                 # 5 R6 agent classes
+    │   ├── orchestration.R          # Pipeline runner, adaptive loop
+    │   ├── evaluation.R             # AUROC, precision@K, benchmarking
+    │   └── utils.R                  # Config, version
+    ├── tests/testthat/              # 135 unit tests
+    ├── vignettes/                   # Getting started tutorial
+    ├── _targets.R                   # Reproducible targets pipeline
+    ├── DESCRIPTION
+    └── NAMESPACE
+
+------------------------------------------------------------------------
+
+## API Reference
+
+### Data Ingestion
+
+| Function                                                                                                            | Description                                                    |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| [`fetch_tcga_data()`](https://danymukesha.github.io/oncoAgent/reference/fetch_tcga_data.md)                         | Download expression, clinical, mutation, methylation from TCGA |
+| [`fetch_depmap_crispr()`](https://danymukesha.github.io/oncoAgent/reference/fetch_depmap_crispr.md)                 | CRISPR dependency scores from DepMap portal                    |
+| [`fetch_gdsc_drug_sensitivity()`](https://danymukesha.github.io/oncoAgent/reference/fetch_gdsc_drug_sensitivity.md) | Drug IC50/AUC from GDSC                                        |
+| [`fetch_string_ppi()`](https://danymukesha.github.io/oncoAgent/reference/fetch_string_ppi.md)                       | Protein-protein interactions from STRING                       |
+| [`fetch_pubmed_abstracts()`](https://danymukesha.github.io/oncoAgent/reference/fetch_pubmed_abstracts.md)           | Literature search via PubMed E-utilities                       |
+| [`map_gene_ids()`](https://danymukesha.github.io/oncoAgent/reference/map_gene_ids.md)                               | Cross-reference IDs via biomaRt                                |
+| [`build_reference_panel()`](https://danymukesha.github.io/oncoAgent/reference/build_reference_panel.md)             | Aggregate COSMIC/CGC gold standards                            |
+
+### Analysis
+
+| Function                                                                                                  | Description                     |
+|-----------------------------------------------------------------------------------------------------------|---------------------------------|
+| [`run_deseq2()`](https://danymukesha.github.io/oncoAgent/reference/run_deseq2.md)                         | DESeq2 differential expression  |
+| [`run_edger()`](https://danymukesha.github.io/oncoAgent/reference/run_edger.md)                           | edgeR quasi-likelihood pipeline |
+| [`run_limma_voom()`](https://danymukesha.github.io/oncoAgent/reference/run_limma_voom.md)                 | limma-voom with quality weights |
+| [`consensus_de()`](https://danymukesha.github.io/oncoAgent/reference/consensus_de.md)                     | Multi-method consensus ranking  |
+| [`run_cox_regression()`](https://danymukesha.github.io/oncoAgent/reference/run_cox_regression.md)         | Univariate Cox PH model         |
+| [`run_kaplan_meier()`](https://danymukesha.github.io/oncoAgent/reference/run_kaplan_meier.md)             | KM curves with log-rank test    |
+| [`build_ppi_network()`](https://danymukesha.github.io/oncoAgent/reference/build_ppi_network.md)           | Construct igraph PPI network    |
+| [`detect_network_modules()`](https://danymukesha.github.io/oncoAgent/reference/detect_network_modules.md) | Louvain community detection     |
+
+### Agents
+
+| Class                | Role                                          |
+|----------------------|-----------------------------------------------|
+| `DataDiscoveryAgent` | Data availability, missing modality detection |
+| `AnalysisAgent`      | Execute DE/survival/network pipelines         |
+| `HypothesisAgent`    | Generate mechanistic hypotheses               |
+| `GapDetectionAgent`  | Find data gaps, low power, conflicts          |
+| `EvaluationAgent`    | Benchmark vs gold standards                   |
+
+### Pipeline
+
+| Function                                                                                                  | Description                      |
+|-----------------------------------------------------------------------------------------------------------|----------------------------------|
+| [`run_oncopipeline()`](https://danymukesha.github.io/oncoAgent/reference/run_oncopipeline.md)             | Full 7-phase pipeline execution  |
+| [`create_pipeline_config()`](https://danymukesha.github.io/oncoAgent/reference/create_pipeline_config.md) | Standardized configuration       |
+| [`adaptive_pipeline_loop()`](https://danymukesha.github.io/oncoAgent/reference/adaptive_pipeline_loop.md) | Gap-driven iterative re-analysis |
+
+------------------------------------------------------------------------
+
+## Citation
+
+``` bibtex
+@software{oncoagent2026,
+  title  = {oncoAgent: Agentic AI-Driven Oncology Target Discovery
+            from Multi-Omics Data},
+  author = {Dany Mukesha},
+  year   = {2026},
+  url    = {https://github.com/oncoagent/oncoAgent}
+}
+```
+
+------------------------------------------------------------------------
+
+## Demo
+
+A complete end-to-end demo is included at `inst/scripts/run_demo.R`. It:
+
+- Builds a reference panel from COSMIC Cancer Gene Census
+- Fetches PPI data from STRING (with synthetic fallback)
+- Simulates realistic TCGA-BRCA-like RNA-seq data
+- Runs consensus DE, survival analysis, network analysis
+- Scores and ranks targets
+- Benchmarks against gold standards
+- Generates gap reports and hypotheses
+
+``` r
+# After installing oncoAgent:
+source(system.file("scripts", "run_demo.R", package = "oncoAgent"))
+```
+
+Runtime: ~2-5 minutes.
+
+------------------------------------------------------------------------
+
+## License
+
+MIT
+
+------------------------------------------------------------------------
+
+## References
+
+------------------------------------------------------------------------
+
+1.  Weinstein, J.N. et al. (2013). The Cancer Genome Atlas Pan-Cancer
+    analysis project. *Nature Genetics*, 45(10), 1113-1120.
+    <doi:%5B10.1038/ng.2764>\](<https://doi.org/10.1038/ng.2764>)
+
+2.  Hutter, C. & Zenklusen, J.C. (2018). The Cancer Genome Atlas:
+    Creating a lasting legacy. *Cell*, 173(2), 283-285.
+    <doi:%5B10.1016/j.cell.2018.03.042>\](<https://doi.org/10.1016/j.cell.2018.03.042>)
+
+3.  Colaprico, A. et al. (2016). TCGAbiolinks: an R/Bioconductor package
+    for integrative analysis of TCGA data. *Nucleic Acids Research*,
+    44(8), e71.
+    <doi:%5B10.1093/nar/gkv1507>\](<https://doi.org/10.1093/nar/gkv1507>)
+
+4.  Tsherniak, A. et al. (2017). Defining a cancer dependency map.
+    *Cell*, 170(3), 564-576.
+    <doi:%5B10.1016/j.cell.2017.06.010>\](<https://doi.org/10.1016/j.cell.2017.06.010>)
+
+5.  Vazquez, F. et al. (2024). The present and future of the Cancer
+    Dependency Map. *Nature Reviews Cancer*, 24, 861-874.
+    <doi:%5B10.1038/s41568-024-00763-x>\](<https://doi.org/10.1038/s41568-024-00763-x>)
+
+6.  Yang, W. et al. (2013). Genomics of Drug Sensitivity in Cancer
+    (GDSC): a resource for therapeutic biomarker discovery in cancer
+    cells. *Nucleic Acids Research*, 41(D1), D955-D961.
+    <doi:%5B10.1093/nar/gks1111>\](<https://doi.org/10.1093/nar/gks1111>)
+
+7.  Iorio, F. et al. (2016). A landscape of pharmacogenomic interactions
+    in cancer. *Cell*, 166(3), 740-754.
+    <doi:%5B10.1016/j.cell.2016.06.017>\](<https://doi.org/10.1016/j.cell.2016.06.017>)
+
+8.  Szklarczyk, D. et al. (2023). STRING v12: protein-protein
+    association networks with increased coverage, supporting functional
+    discovery in genome-wide experimental datasets. *Nucleic Acids
+    Research*, 51(D1), D605-D612.
+    <doi:%5B10.1093/nar/gkac1000>\](<https://doi.org/10.1093/nar/gkac1000>)
+
+9.  Sondka, Z. et al. (2018). The COSMIC Cancer Gene Census: describing
+    genetic dysfunction across all human cancers. *Nature Reviews
+    Cancer*, 18, 696-705.
+    <doi:%5B10.1038/s41568-018-0060-1>\](<https://doi.org/10.1038/s41568-018-0060-1>)
+
+10. Love, M.I., Huber, W. & Anders, S. (2014). Moderated estimation of
+    fold change and dispersion for RNA-seq data with DESeq2. *Genome
+    Biology*, 15, 550.
+    <doi:%5B10.1186/s13059-014-0550-8>\](<https://doi.org/10.1186/s13059-014-0550-8>)
+
+11. Robinson, M.D., McCarthy, D.J. & Smyth, G.K. (2010). edgeR: a
+    Bioconductor package for differential expression analysis of digital
+    gene expression data. *Bioinformatics*, 26(1), 139-140.
+    <doi:%5B10.1093/bioinformatics/btp616>\](<https://doi.org/10.1093/bioinformatics/btp616>)
+
+12. Law, C.W. et al. (2014). voom: precision weights unlock linear model
+    analysis tools for RNA-seq read counts. *Genome Biology*, 15, R29.
+    <doi:%5B10.1186/gb-2014-15-2-r29>\](<https://doi.org/10.1186/gb-2014-15-2-r29>)
+
+13. Schurch, N.J. et al. (2016). How many biological replicates are
+    needed in an RNA-seq experiment and which differential expression
+    tool should you use? *RNA*, 22(6), 839-851.
+    <doi:%5B10.1261/rna.053959.115>\](<https://doi.org/10.1261/rna.053959.115>)
+
+14. Cox, D.R. (1972). Regression models and life-tables. *Journal of the
+    Royal Statistical Society: Series B*, 34(2), 187-202.
+    <doi:%5B10.1111/j.2517-6161.1972.tb00899.x>\](<https://doi.org/10.1111/j.2517-6161.1972.tb00899.x>)
+
+15. Simon, N. et al. (2011). Regularization paths for Cox’s proportional
+    hazards model via coordinate descent. *Journal of Statistical
+    Software*, 39(5), 1-13.
+    <doi:%5B10.18637/jss.v039.i05>\](<https://doi.org/10.18637/jss.v039.i05>)
+
+16. Blondel, V.D. et al. (2008). Fast unfolding of communities in large
+    networks. *Journal of Statistical Mechanics: Theory and Experiment*,
+    2008(10), P10008.
+    <doi:%5B10.1088/1742-5468/2008/10/P10008>\](<https://doi.org/10.1088/1742-5468/2008/10/P10008>)
+
+17. Guney, E., Menche, J., Vidal, M. & Barabasi, A.L. (2016).
+    Network-based in silico drug efficacy screening. *Nature
+    Communications*, 7, 10331.
+    <doi:%5B10.1038/ncomms10331>\](<https://doi.org/10.1038/ncomms10331>)
+
+18. Mitsos, A. et al. (2009). Identifying drug effects via pathway
+    alterations using an integer linear programming optimization
+    formulation on phosphoproteomic data. *PLoS Computational Biology*,
+    5(12), e1000591.
+    <doi:%5B10.1371/journal.pcbi.1000591>\](<https://doi.org/10.1371/journal.pcbi.1000591>)

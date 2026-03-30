@@ -62,7 +62,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="oncoagent">oncoAgent<a class="anchor" aria-label="anchor" href="#oncoagent"></a>
 </h1></div>
-<p><strong>Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data</strong> <a href="https://github.com/danymukesha/oncoAgent" class="external-link"><img src="reference/figures/oncoAgent_logo_origin.png" align="right" height="120" alt="oncoAgent website"></a></p>
+<p><strong>Agentic AI-Driven Oncology Target Discovery from Multi-Omics Data</strong> <a href="https://github.com/danymukesha/oncoAgent" class="external-link"><img src="reference/figures/oncoAgent_logo_origin.png" align="right" height="90" alt="oncoAgent website"></a></p>
 <p><img src="https://img.shields.io/badge/R-%E2%89%A54.1.0-blue" alt="R &gt;= 4.1.0"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"><img src="https://img.shields.io/badge/Tests-135%20passing-brightgreen" alt="Tests: 135 passing"><a href="https://github.com/danymukesha/oncoAgent/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/danymukesha/oncoAgent/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
 <hr>
 <div class="section level2">
@@ -128,21 +128,21 @@
 <h3 id="data-sources">Data Sources<a class="anchor" aria-label="anchor" href="#data-sources"></a>
 </h3>
 <ul>
-<li><p><strong>The Cancer Genome Atlas (TCGA)</strong>: Pan-cancer genomic characterization resource spanning 33 cancer types, 11,000+ tumors [^1][^2]. oncoAgent uses TCGAbiolinks for programmatic access [^3].</p></li>
-<li><p><strong>Cancer Dependency Map (DepMap)</strong>: Genome-scale CRISPR-Cas9 essentiality screens across 1,000+ cancer cell lines [^4][^5]. Used to identify genes with selective dependencies in specific cancer contexts.</p></li>
-<li><p><strong>Genomics of Drug Sensitivity in Cancer (GDSC)</strong>: Systematic drug response profiling linking genomic features to pharmacological sensitivity [^6][^7].</p></li>
-<li><p><strong>STRING Database</strong>: Protein-protein interaction network covering &gt;14,000 organisms with scored evidence from experiments, databases, and text mining [^8].</p></li>
-<li><p><strong>COSMIC Cancer Gene Census</strong>: Curated list of genes with mutations causally implicated in cancer, used as the primary gold standard for benchmarking [^9].</p></li>
+<li><p><strong>The Cancer Genome Atlas (TCGA)</strong>: Pan-cancer genomic characterization resource spanning 33 cancer types, 11,000+ tumors <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Weinstein, J.N. et al. (2013). The Cancer Genome Atlas Pan-Cancer analysis project. &lt;em&gt;Nature Genetics&lt;/em&gt;, 45(10), 1113-1120. &lt;a href="doi:%5B10.1038/ng.2764" class="uri"&gt;doi:[10.1038/ng.2764&lt;/a&gt;](&lt;a href="https://doi.org/10.1038/ng.2764" class="external-link uri"&gt;https://doi.org/10.1038/ng.2764&lt;/a&gt;)&lt;/p&gt;'><sup>1</sup></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Hutter, C. &amp;amp; Zenklusen, J.C. (2018). The Cancer Genome Atlas: Creating a lasting legacy. &lt;em&gt;Cell&lt;/em&gt;, 173(2), 283-285. &lt;a href="doi:%5B10.1016/j.cell.2018.03.042" class="uri"&gt;doi:[10.1016/j.cell.2018.03.042&lt;/a&gt;](&lt;a href="https://doi.org/10.1016/j.cell.2018.03.042" class="external-link uri"&gt;https://doi.org/10.1016/j.cell.2018.03.042&lt;/a&gt;)&lt;/p&gt;'><sup>2</sup></a>. oncoAgent uses TCGAbiolinks for programmatic access <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Colaprico, A. et al. (2016). TCGAbiolinks: an R/Bioconductor package for integrative analysis of TCGA data. &lt;em&gt;Nucleic Acids Research&lt;/em&gt;, 44(8), e71. &lt;a href="doi:%5B10.1093/nar/gkv1507" class="uri"&gt;doi:[10.1093/nar/gkv1507&lt;/a&gt;](&lt;a href="https://doi.org/10.1093/nar/gkv1507" class="external-link uri"&gt;https://doi.org/10.1093/nar/gkv1507&lt;/a&gt;)&lt;/p&gt;'><sup>3</sup></a>.</p></li>
+<li><p><strong>Cancer Dependency Map (DepMap)</strong>: Genome-scale CRISPR-Cas9 essentiality screens across 1,000+ cancer cell lines <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Tsherniak, A. et al. (2017). Defining a cancer dependency map. &lt;em&gt;Cell&lt;/em&gt;, 170(3), 564-576. &lt;a href="doi:%5B10.1016/j.cell.2017.06.010" class="uri"&gt;doi:[10.1016/j.cell.2017.06.010&lt;/a&gt;](&lt;a href="https://doi.org/10.1016/j.cell.2017.06.010" class="external-link uri"&gt;https://doi.org/10.1016/j.cell.2017.06.010&lt;/a&gt;)&lt;/p&gt;'><sup>4</sup></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Vazquez, F. et al. (2024). The present and future of the Cancer Dependency Map. &lt;em&gt;Nature Reviews Cancer&lt;/em&gt;, 24, 861-874. &lt;a href="doi:%5B10.1038/s41568-024-00763-x" class="uri"&gt;doi:[10.1038/s41568-024-00763-x&lt;/a&gt;](&lt;a href="https://doi.org/10.1038/s41568-024-00763-x" class="external-link uri"&gt;https://doi.org/10.1038/s41568-024-00763-x&lt;/a&gt;)&lt;/p&gt;'><sup>5</sup></a>. Used to identify genes with selective dependencies in specific cancer contexts.</p></li>
+<li><p><strong>Genomics of Drug Sensitivity in Cancer (GDSC)</strong>: Systematic drug response profiling linking genomic features to pharmacological sensitivity <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Yang, W. et al. (2013). Genomics of Drug Sensitivity in Cancer (GDSC): a resource for therapeutic biomarker discovery in cancer cells. &lt;em&gt;Nucleic Acids Research&lt;/em&gt;, 41(D1), D955-D961. &lt;a href="doi:%5B10.1093/nar/gks1111" class="uri"&gt;doi:[10.1093/nar/gks1111&lt;/a&gt;](&lt;a href="https://doi.org/10.1093/nar/gks1111" class="external-link uri"&gt;https://doi.org/10.1093/nar/gks1111&lt;/a&gt;)&lt;/p&gt;'><sup>6</sup></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Iorio, F. et al. (2016). A landscape of pharmacogenomic interactions in cancer. &lt;em&gt;Cell&lt;/em&gt;, 166(3), 740-754. &lt;a href="doi:%5B10.1016/j.cell.2016.06.017" class="uri"&gt;doi:[10.1016/j.cell.2016.06.017&lt;/a&gt;](&lt;a href="https://doi.org/10.1016/j.cell.2016.06.017" class="external-link uri"&gt;https://doi.org/10.1016/j.cell.2016.06.017&lt;/a&gt;)&lt;/p&gt;'><sup>7</sup></a>.</p></li>
+<li><p><strong>STRING Database</strong>: Protein-protein interaction network covering &gt;14,000 organisms with scored evidence from experiments, databases, and text mining <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Szklarczyk, D. et al. (2023). STRING v12: protein-protein association networks with increased coverage, supporting functional discovery in genome-wide experimental datasets. &lt;em&gt;Nucleic Acids Research&lt;/em&gt;, 51(D1), D605-D612. &lt;a href="doi:%5B10.1093/nar/gkac1000" class="uri"&gt;doi:[10.1093/nar/gkac1000&lt;/a&gt;](&lt;a href="https://doi.org/10.1093/nar/gkac1000" class="external-link uri"&gt;https://doi.org/10.1093/nar/gkac1000&lt;/a&gt;)&lt;/p&gt;'><sup>8</sup></a>.</p></li>
+<li><p><strong>COSMIC Cancer Gene Census</strong>: Curated list of genes with mutations causally implicated in cancer, used as the primary gold standard for benchmarking <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Sondka, Z. et al. (2018). The COSMIC Cancer Gene Census: describing genetic dysfunction across all human cancers. &lt;em&gt;Nature Reviews Cancer&lt;/em&gt;, 18, 696-705. &lt;a href="doi:%5B10.1038/s41568-018-0060-1" class="uri"&gt;doi:[10.1038/s41568-018-0060-1&lt;/a&gt;](&lt;a href="https://doi.org/10.1038/s41568-018-0060-1" class="external-link uri"&gt;https://doi.org/10.1038/s41568-018-0060-1&lt;/a&gt;)&lt;/p&gt;'><sup>9</sup></a>.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="analysis-methods">Analysis Methods<a class="anchor" aria-label="anchor" href="#analysis-methods"></a>
 </h3>
 <ul>
-<li><p><strong>Differential Expression</strong>: Consensus ranking across DESeq2 [^10], edgeR [^11], and limma-voom [^12], following best practices from systematic benchmarking studies [^13].</p></li>
-<li><p><strong>Survival Analysis</strong>: Cox proportional hazards regression [^14] with LASSO-penalized variable selection for multivariate models [^15].</p></li>
-<li><p><strong>Network Analysis</strong>: Louvain community detection on PPI networks [^16] with centrality-based target prioritization, following the network proximity paradigm [^17].</p></li>
-<li><p><strong>Target Scoring</strong>: Composite scoring integrating differential expression significance, survival association, network centrality, and CRISPR dependency, with Bayesian posterior ranking [^18].</p></li>
+<li><p><strong>Differential Expression</strong>: Consensus ranking across DESeq2 <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Love, M.I., Huber, W. &amp;amp; Anders, S. (2014). Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. &lt;em&gt;Genome Biology&lt;/em&gt;, 15, 550. &lt;a href="doi:%5B10.1186/s13059-014-0550-8" class="uri"&gt;doi:[10.1186/s13059-014-0550-8&lt;/a&gt;](&lt;a href="https://doi.org/10.1186/s13059-014-0550-8" class="external-link uri"&gt;https://doi.org/10.1186/s13059-014-0550-8&lt;/a&gt;)&lt;/p&gt;'><sup>10</sup></a>, edgeR <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Robinson, M.D., McCarthy, D.J. &amp;amp; Smyth, G.K. (2010). edgeR: a Bioconductor package for differential expression analysis of digital gene expression data. &lt;em&gt;Bioinformatics&lt;/em&gt;, 26(1), 139-140. &lt;a href="doi:%5B10.1093/bioinformatics/btp616" class="uri"&gt;doi:[10.1093/bioinformatics/btp616&lt;/a&gt;](&lt;a href="https://doi.org/10.1093/bioinformatics/btp616" class="external-link uri"&gt;https://doi.org/10.1093/bioinformatics/btp616&lt;/a&gt;)&lt;/p&gt;'><sup>11</sup></a>, and limma-voom <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Law, C.W. et al. (2014). voom: precision weights unlock linear model analysis tools for RNA-seq read counts. &lt;em&gt;Genome Biology&lt;/em&gt;, 15, R29. &lt;a href="doi:%5B10.1186/gb-2014-15-2-r29" class="uri"&gt;doi:[10.1186/gb-2014-15-2-r29&lt;/a&gt;](&lt;a href="https://doi.org/10.1186/gb-2014-15-2-r29" class="external-link uri"&gt;https://doi.org/10.1186/gb-2014-15-2-r29&lt;/a&gt;)&lt;/p&gt;'><sup>12</sup></a>, following best practices from systematic benchmarking studies <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Schurch, N.J. et al. (2016). How many biological replicates are needed in an RNA-seq experiment and which differential expression tool should you use? &lt;em&gt;RNA&lt;/em&gt;, 22(6), 839-851. &lt;a href="doi:%5B10.1261/rna.053959.115" class="uri"&gt;doi:[10.1261/rna.053959.115&lt;/a&gt;](&lt;a href="https://doi.org/10.1261/rna.053959.115" class="external-link uri"&gt;https://doi.org/10.1261/rna.053959.115&lt;/a&gt;)&lt;/p&gt;'><sup>13</sup></a>.</p></li>
+<li><p><strong>Survival Analysis</strong>: Cox proportional hazards regression <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Cox, D.R. (1972). Regression models and life-tables. &lt;em&gt;Journal of the Royal Statistical Society: Series B&lt;/em&gt;, 34(2), 187-202. &lt;a href="doi:%5B10.1111/j.2517-6161.1972.tb00899.x" class="uri"&gt;doi:[10.1111/j.2517-6161.1972.tb00899.x&lt;/a&gt;](&lt;a href="https://doi.org/10.1111/j.2517-6161.1972.tb00899.x" class="external-link uri"&gt;https://doi.org/10.1111/j.2517-6161.1972.tb00899.x&lt;/a&gt;)&lt;/p&gt;'><sup>14</sup></a> with LASSO-penalized variable selection for multivariate models <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Simon, N. et al. (2011). Regularization paths for Cox’s proportional hazards model via coordinate descent. &lt;em&gt;Journal of Statistical Software&lt;/em&gt;, 39(5), 1-13. &lt;a href="doi:%5B10.18637/jss.v039.i05" class="uri"&gt;doi:[10.18637/jss.v039.i05&lt;/a&gt;](&lt;a href="https://doi.org/10.18637/jss.v039.i05" class="external-link uri"&gt;https://doi.org/10.18637/jss.v039.i05&lt;/a&gt;)&lt;/p&gt;'><sup>15</sup></a>.</p></li>
+<li><p><strong>Network Analysis</strong>: Louvain community detection on PPI networks <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Blondel, V.D. et al. (2008). Fast unfolding of communities in large networks. &lt;em&gt;Journal of Statistical Mechanics: Theory and Experiment&lt;/em&gt;, 2008(10), P10008. &lt;a href="doi:%5B10.1088/1742-5468/2008/10/P10008" class="uri"&gt;doi:[10.1088/1742-5468/2008/10/P10008&lt;/a&gt;](&lt;a href="https://doi.org/10.1088/1742-5468/2008/10/P10008" class="external-link uri"&gt;https://doi.org/10.1088/1742-5468/2008/10/P10008&lt;/a&gt;)&lt;/p&gt;'><sup>16</sup></a> with centrality-based target prioritization, following the network proximity paradigm <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Guney, E., Menche, J., Vidal, M. &amp;amp; Barabasi, A.L. (2016). Network-based in silico drug efficacy screening. &lt;em&gt;Nature Communications&lt;/em&gt;, 7, 10331. &lt;a href="doi:%5B10.1038/ncomms10331" class="uri"&gt;doi:[10.1038/ncomms10331&lt;/a&gt;](&lt;a href="https://doi.org/10.1038/ncomms10331" class="external-link uri"&gt;https://doi.org/10.1038/ncomms10331&lt;/a&gt;)&lt;/p&gt;'><sup>17</sup></a>.</p></li>
+<li><p><strong>Target Scoring</strong>: Composite scoring integrating differential expression significance, survival association, network centrality, and CRISPR dependency, with Bayesian posterior ranking <a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Mitsos, A. et al. (2009). Identifying drug effects via pathway alterations using an integer linear programming optimization formulation on phosphoproteomic data. &lt;em&gt;PLoS Computational Biology&lt;/em&gt;, 5(12), e1000591. &lt;a href="doi:%5B10.1371/journal.pcbi.1000591" class="uri"&gt;doi:[10.1371/journal.pcbi.1000591&lt;/a&gt;](&lt;a href="https://doi.org/10.1371/journal.pcbi.1000591" class="external-link uri"&gt;https://doi.org/10.1371/journal.pcbi.1000591&lt;/a&gt;)&lt;/p&gt;'><sup>18</sup></a>.</p></li>
 </ul>
 <hr>
 </div>
@@ -308,9 +308,256 @@
 <h2 id="agentic-architecture">Agentic Architecture<a class="anchor" aria-label="anchor" href="#agentic-architecture"></a>
 </h2>
 <p>oncoAgent implements five R6 agent classes that collaborate in an adaptive loop:</p>
-<p>``` bb</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    Orchestration Layer                      │
+│              run_oncopipeline(config)                       │
+└──────────┬──────────┬─────────┬─────────┬───────────┬───────┘
+           │          │         │         │           |
+     ┌─────▼──┐ ┌─────▼──┐ ┌────▼───┐ ┌───▼────┐ ┌────▼─────┐
+     │ Data   │ │Analy-  │ │Hypo-   │ │ Gap    │ │Evalua-   │
+     │ Discov │ │sis     │ │thesis  │ │Detect  │ │tion      │
+     │ Agent  │ │Agent   │ │Agent   │ │Agent   │ │Agent     │
+     └────────┘ └────────┘ └────────┘ └────────┘ └──────────┘
+         │           │          │          │           │
+    Fetch data   Run DE/     Generate   Find gaps   Benchmark
+    Check gaps   Surv/Net    mechan-    Suggest     vs COSMIC
+                 pipelines   isms       fixes       CGC gold
+                                                    standards</code></pre>
+<div class="section level3">
+<h3 id="adaptive-loop">Adaptive Loop<a class="anchor" aria-label="anchor" href="#adaptive-loop"></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The agentic loop automatically re-runs if critical gaps are found</span></span>
+<span><span class="va">adaptive_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/adaptive_pipeline_loop.html">adaptive_pipeline_loop</a></span><span class="op">(</span></span>
+<span>  <span class="va">config</span>,</span>
+<span>  max_iterations <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  improvement_threshold <span class="op">=</span> <span class="fl">0.01</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The gap detection agent identifies:</p>
+<ul>
+<li>Missing data modalities (expression, clinical, PPI, CRISPR)</li>
+<li>Insufficient sample sizes (&lt; 50 samples)</li>
+<li>Low DEG signal (&lt; 100 significant genes)</li>
+<li>Conflicting signals between scoring dimensions</li>
+</ul>
+<hr>
 </div>
 </div>
+<div class="section level2">
+<h2 id="project-structure">Project Structure<a class="anchor" aria-label="anchor" href="#project-structure"></a>
+</h2>
+<pre><code>oncoAgent/
+├── R/
+│   ├── data_ingestion.R         # TCGA, DepMap, GDSC, STRING, PubMed
+│   ├── preprocessing.R          # Normalization, batch correction, QC
+│   ├── differential_expression.R # DESeq2, edgeR, limma-voom, consensus
+│   ├── survival_analysis.R      # Cox PH, KM, LASSO-survival
+│   ├── network_analysis.R       # PPI, Louvain, centrality
+│   ├── target_scoring.R         # Composite, Bayesian, druggability
+│   ├── agents.R                 # 5 R6 agent classes
+│   ├── orchestration.R          # Pipeline runner, adaptive loop
+│   ├── evaluation.R             # AUROC, precision@K, benchmarking
+│   └── utils.R                  # Config, version
+├── tests/testthat/              # 135 unit tests
+├── vignettes/                   # Getting started tutorial
+├── _targets.R                   # Reproducible targets pipeline
+├── DESCRIPTION
+└── NAMESPACE</code></pre>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="api-reference">API Reference<a class="anchor" aria-label="anchor" href="#api-reference"></a>
+</h2>
+<div class="section level3">
+<h3 id="data-ingestion">Data Ingestion<a class="anchor" aria-label="anchor" href="#data-ingestion"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="43%">
+<col width="56%">
+</colgroup>
+<thead><tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="reference/fetch_tcga_data.html">fetch_tcga_data()</a></code></td>
+<td>Download expression, clinical, mutation, methylation from TCGA</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/fetch_depmap_crispr.html">fetch_depmap_crispr()</a></code></td>
+<td>CRISPR dependency scores from DepMap portal</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/fetch_gdsc_drug_sensitivity.html">fetch_gdsc_drug_sensitivity()</a></code></td>
+<td>Drug IC50/AUC from GDSC</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/fetch_string_ppi.html">fetch_string_ppi()</a></code></td>
+<td>Protein-protein interactions from STRING</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/fetch_pubmed_abstracts.html">fetch_pubmed_abstracts()</a></code></td>
+<td>Literature search via PubMed E-utilities</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/map_gene_ids.html">map_gene_ids()</a></code></td>
+<td>Cross-reference IDs via biomaRt</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/build_reference_panel.html">build_reference_panel()</a></code></td>
+<td>Aggregate COSMIC/CGC gold standards</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
+</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="reference/run_deseq2.html">run_deseq2()</a></code></td>
+<td>DESeq2 differential expression</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/run_edger.html">run_edger()</a></code></td>
+<td>edgeR quasi-likelihood pipeline</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/run_limma_voom.html">run_limma_voom()</a></code></td>
+<td>limma-voom with quality weights</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/consensus_de.html">consensus_de()</a></code></td>
+<td>Multi-method consensus ranking</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/run_cox_regression.html">run_cox_regression()</a></code></td>
+<td>Univariate Cox PH model</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/run_kaplan_meier.html">run_kaplan_meier()</a></code></td>
+<td>KM curves with log-rank test</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/build_ppi_network.html">build_ppi_network()</a></code></td>
+<td>Construct igraph PPI network</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/detect_network_modules.html">detect_network_modules()</a></code></td>
+<td>Louvain community detection</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="agents">Agents<a class="anchor" aria-label="anchor" href="#agents"></a>
+</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Class</th>
+<th>Role</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>DataDiscoveryAgent</code></td>
+<td>Data availability, missing modality detection</td>
+</tr>
+<tr class="even">
+<td><code>AnalysisAgent</code></td>
+<td>Execute DE/survival/network pipelines</td>
+</tr>
+<tr class="odd">
+<td><code>HypothesisAgent</code></td>
+<td>Generate mechanistic hypotheses</td>
+</tr>
+<tr class="even">
+<td><code>GapDetectionAgent</code></td>
+<td>Find data gaps, low power, conflicts</td>
+</tr>
+<tr class="odd">
+<td><code>EvaluationAgent</code></td>
+<td>Benchmark vs gold standards</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="pipeline">Pipeline<a class="anchor" aria-label="anchor" href="#pipeline"></a>
+</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="reference/run_oncopipeline.html">run_oncopipeline()</a></code></td>
+<td>Full 7-phase pipeline execution</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/create_pipeline_config.html">create_pipeline_config()</a></code></td>
+<td>Standardized configuration</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/adaptive_pipeline_loop.html">adaptive_pipeline_loop()</a></code></td>
+<td>Gap-driven iterative re-analysis</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co">@software{oncoagent2026,</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">  title  = {oncoAgent: Agentic AI-Driven Oncology Target Discovery</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">            from Multi-Omics Data},</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">  author = {Dany Mukesha},</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">  year   = {2026},</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">  url    = {https://github.com/oncoagent/oncoAgent}</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">}</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="demo">Demo<a class="anchor" aria-label="anchor" href="#demo"></a>
+</h2>
+<p>A complete end-to-end demo is included at <code>inst/scripts/run_demo.R</code>. It:</p>
+<ul>
+<li>Builds a reference panel from COSMIC Cancer Gene Census</li>
+<li>Fetches PPI data from STRING (with synthetic fallback)</li>
+<li>Simulates realistic TCGA-BRCA-like RNA-seq data</li>
+<li>Runs consensus DE, survival analysis, network analysis</li>
+<li>Scores and ranks targets</li>
+<li>Benchmarks against gold standards</li>
+<li>Generates gap reports and hypotheses</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># After installing oncoAgent:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"scripts"</span>, <span class="st">"run_demo.R"</span>, package <span class="op">=</span> <span class="st">"oncoAgent"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Runtime: ~2-5 minutes.</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>MIT</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+</div>
+</div>
+
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
