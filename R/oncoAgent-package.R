@@ -15,6 +15,5 @@
 #' @importFrom data.table as.data.table rbindlist
 #' @importFrom ggplot2 ggplot aes geom_point geom_hline geom_vline theme_minimal labs scale_color_manual
 #' @importFrom pROC roc auc
-#' @import apeglm
 ## usethis namespace: end
 NULL
