@@ -47,7 +47,7 @@ run_deseq2 <- function(count_matrix,
 
     if (shrink && requireNamespace("apeglm", quietly = TRUE)) {
         coef_name <- DESeq2::resultsNames(dds)[length(DESeq2::resultsNames(dds))]
-        res <- apeglm::lfcShrink(dds, coef = coef_name, type = "apeglm", res = res)
+        res <- DESeq2::lfcShrink(dds, coef = coef_name, type = "apeglm", res = res) # changed from apeglm::lfcShrink
     }
 
     res_df <- as.data.frame(res)
